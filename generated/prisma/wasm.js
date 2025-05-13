@@ -126,9 +126,55 @@ exports.Prisma.AppartmentScalarFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.RoomScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  appartmentId: 'appartmentId'
+};
+
+exports.Prisma.SensorScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  attributes: 'attributes',
+  value: 'value',
+  roomId: 'roomId',
+  typeId: 'typeId'
+};
+
+exports.Prisma.DeviceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  attributes: 'attributes',
+  typeId: 'typeId',
+  roomId: 'roomId'
+};
+
+exports.Prisma.DeviceTypeScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  attributes: 'attributes'
+};
+
+exports.Prisma.SensorTypeScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  attributes: 'attributes'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -136,9 +182,25 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
-  Appartment: 'Appartment'
+  Appartment: 'Appartment',
+  Room: 'Room',
+  Sensor: 'Sensor',
+  Device: 'Device',
+  DeviceType: 'DeviceType',
+  SensorType: 'SensorType'
 };
 
 /**

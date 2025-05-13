@@ -16,7 +16,58 @@ datasource db {
 }
 
 model Appartment {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
-  description String
+  description String?
+  rooms       Room[]
+}
+
+model Room {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String?
+  appartmentId Int
+  appartment   Appartment @relation(fields: [appartmentId], references: [id])
+  Sensor       Sensor[]
+  Device       Device[]
+}
+
+model Sensor {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  attributes  Json?
+  value       Json?
+  roomId      Int
+  typeId      Int
+  room        Room       @relation(fields: [roomId], references: [id])
+  type        SensorType @relation(fields: [typeId], references: [id])
+}
+
+model Device {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      String?
+  attributes  Json?
+  typeId      Int
+  roomId      Int
+  room        Room       @relation(fields: [roomId], references: [id])
+  type        DeviceType @relation(fields: [typeId], references: [id])
+}
+
+model DeviceType {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  attributes  Json?
+  devices     Device[]
+}
+
+model SensorType {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  attributes  Json?
+  sensors     Sensor[]
 }
