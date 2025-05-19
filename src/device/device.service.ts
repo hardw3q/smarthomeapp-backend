@@ -26,7 +26,34 @@ export class DeviceService {
       }
     });
   }
+  async update(id: number, updateDeviceDto: UpdateDeviceDto) {
+    await this.validateRelationsExist(updateDeviceDto);
 
+    try {
+      return await this.prisma.device.update({
+        where: { id },
+        data: {
+          title: updateDeviceDto.title,
+          description: updateDeviceDto.description,
+          status: updateDeviceDto.status,
+          attributes: updateDeviceDto.attributes,
+          ...(updateDeviceDto.typeId && {
+            type: { connect: { id: updateDeviceDto.typeId } }
+          }),
+          ...(updateDeviceDto.roomId && {
+            room: { connect: { id: updateDeviceDto.roomId } }
+          })
+        },
+        include: {
+          type: true,
+          room: true
+        }
+      });
+    } catch (error) {
+      this.handlePrismaError(error, id);
+      throw error;
+    }
+  }
   async findAll() {
     return this.prisma.device.findMany({
       include: {
