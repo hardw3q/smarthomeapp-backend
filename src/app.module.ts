@@ -4,8 +4,9 @@ import { ApartmentModule } from './apartment/apartment.module';
 import { RoomModule } from './room/room.module';
 import { SensorModule } from './sensor/sensor.module';
 import { DeviceModule } from './device/device.module';
+import { YandexModule } from './yandex/yandex.module';
 
 @Module({
-  imports: [PrismaModule, ApartmentModule, RoomModule, SensorModule, DeviceModule],
+  imports: [PrismaModule, ApartmentModule, RoomModule, SensorModule, DeviceModule, YandexModule],
 })
 export class AppModule {}
