@@ -8,6 +8,7 @@ export class MetricsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createMetricDto: CreateMetricDto) {
+    console.log(createMetricDto)
     return this.prisma.sensorMetrics.create({
       data: {
         datetime: createMetricDto.datetime,

@@ -5,7 +5,7 @@ export class CreateMetricDto {
         example: '2025-05-21T14:30:00Z',
         description: 'Дата и время метрики (формат ISO 8601)',
     })
-    datetime: Date;
+    datetime?: Date;
 
     @ApiProperty({
         example: { temperature: 22.5 },

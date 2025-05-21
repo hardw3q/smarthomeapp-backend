@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {MicroserviceOptions} from "@nestjs/microservices";
+import {MicroserviceOptions, Transport} from "@nestjs/microservices";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 
 async function bootstrap() {
@@ -19,6 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document); // Теперь доступен по /v1/docs
 
   app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.MQTT,
     options: {
       url: 'mqtt://83.217.223.148:1883',
     },
