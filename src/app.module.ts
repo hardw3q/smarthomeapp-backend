@@ -6,8 +6,9 @@ import { SensorModule } from './sensor/sensor.module';
 import { DeviceModule } from './device/device.module';
 import { YandexModule } from './yandex/yandex.module';
 import { MetricsModule } from './metrics/metrics.module';
+import { SensorTypeModule } from './sensortype/sensortype.module';
 
 @Module({
-  imports: [PrismaModule, ApartmentModule, RoomModule, SensorModule, DeviceModule, YandexModule, MetricsModule],
+  imports: [PrismaModule, ApartmentModule, RoomModule, SensorModule, DeviceModule, YandexModule, MetricsModule, SensorTypeModule],
 })
 export class AppModule {}
