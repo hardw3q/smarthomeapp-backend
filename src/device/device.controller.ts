@@ -3,10 +3,11 @@ import { DeviceService } from './device.service';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiCreatedResponse, ApiNotFoundResponse } from '@nestjs/swagger';
+import {CommandPushDto} from "./dto/command.dto";
 
 @ApiBearerAuth()
 @ApiTags('Устройства')
-@Controller('v1/device')
+@Controller('device')
 export class DeviceController {
   constructor(private readonly deviceService: DeviceService) {}
 
@@ -49,5 +50,10 @@ export class DeviceController {
   @ApiNotFoundResponse({ description: 'Устройство с указанным ID не найдено.' })
   remove(@Param('id') id: string){
     return this.deviceService.remove(+id);
+  }
+
+  @Post('/command/push')
+  pushCommand(@Body() data: CommandPushDto){
+      return this.deviceService.pushDeviceCommand(data)
   }
 }

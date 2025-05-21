@@ -6,7 +6,7 @@ import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiCreatedResponse, 
 
 @ApiBearerAuth()
 @ApiTags('Комнаты')
-@Controller('v1/room')
+@Controller('room')
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 

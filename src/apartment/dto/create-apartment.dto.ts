@@ -1,18 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {CreateRoomDto} from "../../room/dto/create-room.dto";
 
-class CreateRoomDto {
-    @ApiProperty({
-        example: 'Спальня',
-        description: 'Название комнаты',
-    })
-    title: string;
-
-    @ApiPropertyOptional({
-        example: 'Уютная спальня с балконом',
-        description: 'Описание комнаты (необязательно)',
-    })
-    description?: string;
-}
 
 export class CreateApartmentDto {
     @ApiProperty({

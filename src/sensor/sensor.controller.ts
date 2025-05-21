@@ -6,7 +6,7 @@ import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiCreatedResponse, 
 
 @ApiBearerAuth()
 @ApiTags('Датчики')
-@Controller('v1/sensor')
+@Controller('sensor')
 export class SensorController {
   constructor(private readonly sensorService: SensorService) {}
 

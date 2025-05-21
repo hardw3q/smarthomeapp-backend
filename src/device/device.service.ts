@@ -1,11 +1,16 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import {BadRequestException, Inject, Injectable, NotFoundException} from '@nestjs/common';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
 import {PrismaService} from "../prisma/prisma.service";
+import {CommandDto, CommandPushDto} from "./dto/command.dto";
+import {ClientProxy} from "@nestjs/microservices";
+import {DeviceTypeService} from "../devicetype/devicetype.service";
 
 @Injectable()
 export class DeviceService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService,
+              @Inject('MQTT_SERVICE') private readonly client: ClientProxy,
+              private readonly deviceTypeService: DeviceTypeService) {}
 
   async create(createDeviceDto: CreateDeviceDto) {
     // Проверка существования DeviceType и Room
@@ -85,7 +90,7 @@ export class DeviceService {
     }
     return device;
   }
-  ''
+
 
   async remove(id: number) {
     return `This action removes a #${id} device`;
@@ -116,4 +121,20 @@ export class DeviceService {
     }
     throw error;
   }
+
+  private sendCommand(deviceId: number, command: CommandDto){
+      this.client.emit(`device.push[${deviceId}]`, command)
+  }
+
+  async pushDeviceCommand(data: CommandPushDto){
+      const device = await this.findOne(data.deviceId);
+      if(!device) throw new NotFoundException('Устройство не найдено')
+      const deviceType = await this.deviceTypeService.findOne(device.typeId);
+      if(!deviceType) throw new NotFoundException('Не найден тип устройства')
+      const attributes = deviceType.attributes;
+      if(!attributes) throw new NotFoundException('У типа устройства нет атрибутов')
+      if(!attributes['commands'].includes(data.command)) throw new BadRequestException('У устройства нет такой команды')
+      this.sendCommand(data.deviceId, {command: data.command, value: data.value})
+  }
 }
+
