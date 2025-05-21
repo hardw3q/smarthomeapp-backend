@@ -167,6 +167,12 @@ exports.Prisma.SensorTypeScalarFieldEnum = {
   attributes: 'attributes'
 };
 
+exports.Prisma.SensorMetricsScalarFieldEnum = {
+  datetime: 'datetime',
+  value: 'value',
+  sensorId: 'sensorId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,6 +180,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -200,7 +210,8 @@ exports.Prisma.ModelName = {
   Sensor: 'Sensor',
   Device: 'Device',
   DeviceType: 'DeviceType',
-  SensorType: 'SensorType'
+  SensorType: 'SensorType',
+  SensorMetrics: 'SensorMetrics'
 };
 
 /**

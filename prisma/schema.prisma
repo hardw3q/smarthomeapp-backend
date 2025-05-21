@@ -33,15 +33,16 @@ model Room {
 }
 
 model Sensor {
-  id          Int        @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   title       String
   description String?
   attributes  Json?
   value       Json?
   roomId      Int
   typeId      Int
-  room        Room       @relation(fields: [roomId], references: [id])
-  type        SensorType @relation(fields: [typeId], references: [id])
+  room        Room            @relation(fields: [roomId], references: [id])
+  type        SensorType      @relation(fields: [typeId], references: [id])
+  metrics     SensorMetrics[]
 }
 
 model Device {
@@ -70,4 +71,11 @@ model SensorType {
   description String?
   attributes  Json?
   sensors     Sensor[]
+}
+
+model SensorMetrics {
+  datetime DateTime @id @default(now())
+  value    Json
+  sensorId Int
+  sensor   Sensor   @relation(fields: [sensorId], references: [id])
 }
